@@ -1,0 +1,49 @@
+import pandas as pd
+import numpy as np
+import matplotlip.pyplot as plt
+from sklearn.model_selection import GridSearchCV
+from sklearn.linearu_model import Ridge
+
+
+## import data
+df_test = pd.read_excel(r'Desktop\IOCL\sarima_test_data.xlsx')
+df_train = pd.read_csv(r'Desktop\IOCL\sarima_trani_data.csv')
+
+## check head of data
+df_test.head()
+df_train.head()
+
+## Scatterplot Quantity vs Price
+def scatter_plot(feature,target):
+plt.figure(figsize=(16,8))
+    plt.scatter(
+        data[feature],
+        data[target],
+        c='black'
+)
+plt.show()
+
+scatter_plot('Quantity','Price')
+
+
+## Ridge Regression
+## predict quantaty
+
+Xs = data.drop(['Quantaty'],axis = 1)
+y = data['Quantaty'].values.reshape(-1, 1)
+
+ridge = Ridge()
+
+## introduce gridsearch to allow us to do a 5 fold cross validation
+
+parameters = ['alpha': [1e-15, 1e-10, 1e-5, 1e-4, 1e-3, 1e-2, 1, 5, 10 , 20)
+ridge_regressor = GridSearchCV(ridge, parameters, sorting= 'neg_mean_squared_error', cv=5)
+ridge_regressor.fit(Xs, y)
+
+## best parameter and the best MSE 
+print(ridge_regressor.best_params_)
+print(ridge_regressor.best_score_)
+
+## code from, and altered according to the excel recieved from Madhur.
+https://towardsdatascience.com/how-to-perform-lasso-and-ridge-regression-in-python-3b3b75541ad8
+
