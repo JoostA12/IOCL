@@ -1,13 +1,13 @@
 import pandas as pd
 import numpy as np
-import matplotlip.pyplot as plt
+import matplotlib.pyplot as plt
 from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import Ridge
 
 
 ## import data
-df_test = pd.read_excel(r'Desktop\IOCL\sarima_test_data.xlsx')
-df_train = pd.read_csv(r'Desktop\IOCL\sarima_trani_data.csv')
+df_test = pd.read_excel("Desktop\IOCL\sarima_test_data.xlsx")
+df_train = pd.read_csv("Desktop\IOCL\sarima_train_data.csv")
 
 ## check head of data
 df_test.head()
@@ -29,15 +29,15 @@ scatter_plot('Quantity','Price')
 ## Ridge Regression
 ## predict quantaty
 
-Xs = data.drop(['Quantaty'],axis = 1)
-y = data['Quantaty'].values.reshape(-1, 1)
+Xs = data.drop(['Quantity'],axis = 1)
+y = data['Quantity'].values.reshape(-1, 1)
 
 ridge = Ridge()
 
 ## introduce gridsearch to allow us to do a 5 fold cross validation
 
-parameters = ['alpha': [1e-15, 1e-10, 1e-5, 1e-4, 1e-3, 1e-2, 1, 5, 10 , 20)
-ridge_regressor = GridSearchCV(ridge, parameters, sorting= 'neg_mean_squared_error', cv=5)
+parameters = {'alpha': [1e-15, 1e-10, 1e-5, 1e-4, 1e-3, 1e-2, 1, 5, 10 , 20]}
+ridge_regressor = GridSearchCV(ridge, parameters, scoring= 'neg_mean_squared_error', cv=5)
 ridge_regressor.fit(Xs, y)
 
 ## best parameter and the best MSE 
