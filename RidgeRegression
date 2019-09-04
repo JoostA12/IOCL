@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlip.pyplot as plt
 from sklearn.model_selection import GridSearchCV
-from sklearn.linearu_model import Ridge
+from sklearn.linear_model import Ridge
 
 
 ## import data
