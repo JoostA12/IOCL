@@ -46,4 +46,3 @@ print(ridge_regressor.best_score_)
 
 ## code from, and altered according to the excel recieved from Madhur.
 https://towardsdatascience.com/how-to-perform-lasso-and-ridge-regression-in-python-3b3b75541ad8
-
